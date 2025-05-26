@@ -3,6 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@progress/kendo-react-animation": "^11.0.0",
+    "@progress/kendo-react-buttons": "^11.0.0",
+    "@progress/kendo-react-charts": "^11.0.0",
+    "@progress/kendo-react-common": "^11.0.0",
+    "@progress/kendo-react-grid": "^11.0.0",
+    "@progress/kendo-react-indicators": "^11.0.0",
+    "@progress/kendo-react-layout": "^11.0.0",
+    "@progress/kendo-react-listview": "^11.0.0",
+    "@progress/kendo-svg-icons": "^4.3.0",
     "@progress/kendo-theme-default": "^11.0.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -10,7 +19,10 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.6.0",
     "react-scripts": "5.0.1",
+    "sweetalert2": "^11.22.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

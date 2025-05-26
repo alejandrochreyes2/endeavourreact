@@ -1,34 +1,78 @@
-// src/Dashboard.js
-import React from 'react';
-import { Button } from '@progress/kendo-react-buttons';
-import './Dashboard.css';
+import React from "react";
+import Header from "./Header/Header";
+import StatsCards from "./StatsCards";
+import StatsCardsn from "./StatsCardsn";
+import SidebarMenu from "./SidebarMenu/SidebarMenu";
+import ComponentDashboard from "./ComponentDashboard";
 
-function Dashboard({ user, onLogout }) {
-    return (
-        <div className="dashboard-container">
-            <header className="dashboard-header">
-                <h1>Gestión de Productos</h1>
-                <div className="user-info">
-                    <span>Bienvenido, {user.nombre}</span>
-                    <Button
-                        look="primary"
-                        onClick={onLogout}
-                        icon="logout"
-                    >
-                        Cerrar Sesión
-                    </Button>
-                </div>
-            </header>
+const DashboardMain = () => {
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {/* Header en la parte superior */}
+      <Header />
 
-            <main className="dashboard-content">
-                <div className="welcome-card">
-                    <h2>Dashboard Principal</h2>
-                    <p>Has iniciado sesión exitosamente como: <strong>{user.usuario}</strong></p>
-                    <p>Aquí puedes comenzar a gestionar tus productos.</p>
-                </div>
-            </main>
+      <div style={{ display: "flex", flex: 1 }}>
+        {/* Sidebar a la izquierda */}
+        <SidebarMenu />
+
+        {/* Contenido principal a la derecha */}
+        <div
+          style={{
+            flex: 1,
+            padding: "10px",
+            background: "#f5f5f5",
+            marginLeft: "20px", // Ajusta segÃºn el ancho de tu sidebar
+            marginTop: "30px", // Ajusta segÃºn la altura de tu header
+          }}
+        >
+          <div className="k-dashboard-header">
+            <h3>Dashboard</h3>
+          </div>
+
+          <div
+            style={{
+              padding: "10px",
+              borderRadius: "10px",
+              background: "#f5f5f5",
+              border: "1px solid black",
+              marginBottom: "10px",
+            }}
+          >
+            <h3>Perfil Empresarial</h3>
+            <ComponentDashboard />
+          </div>
+
+          {/* <div
+            style={{
+              padding: "10px",
+              borderRadius: "10px",
+              background: "#f5f5f5",
+              border: "1px solid black",
+              marginBottom: "10px",
+            }}
+          >
+            <h3>Bandeja de gestion</h3>
+            <StatsCards />
+          </div> */}
+
+          <div
+            style={{
+              padding: "10px",
+              borderRadius: "10px",
+              background: "#f5f5f5",
+              border: "1px solid black",
+              marginBottom: "10px",
+            }}
+          >
+            <h3>Tareas documentales</h3>
+            <div className="p-4">
+              <StatsCardsn />
+            </div>
+          </div>
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
-export default Dashboard;
+export default DashboardMain;

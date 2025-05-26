@@ -1,62 +1,114 @@
-/* src/Dashboard.css */
-.dashboard-container {
-    min-height: 100vh;
-    background: #f5f7fa;
+/* DashboardMain.css */
+
+/* Layout general */
+.k-dashboard-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.dashboard-header {
-    background: white;
-    padding: 20px 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Header: fijo arriba */
+.k-dashboard-layout > .k-appbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px; /* Igual a la altura del header */
+  z-index: 1000;
 }
 
-    .dashboard-header h1 {
-        color: #333;
-        margin: 0;
-        font-size: 24px;
-        font-weight: 600;
-    }
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+/* Contenedor debajo del header */
+.k-dashboard-body {
+  display: flex;
+  flex-grow: 1;
+  margin-top: 56px; /* altura del Header */
+  height: calc(100vh - 56px);
+  overflow: hidden;
 }
 
-    .user-info span {
-        color: #666;
-        font-weight: 500;
-    }
-
-.dashboard-content {
-    padding: 30px;
+/* Sidebar */
+.k-sidebar {
+  width: 240px;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ddd;
+  height: 100%;
+  overflow-y: auto;
+  flex-shrink: 0;
 }
 
-.welcome-card {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    max-width: 600px;
-    margin: 0 auto;
+/* Contenido principal */
+.k-main-content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #fafafa;
 }
 
-    .welcome-card h2 {
-        color: #333;
-        margin: 0 0 20px 0;
-        font-size: 22px;
-        font-weight: 600;
-    }
+.k-dashboard-header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
 
-    .welcome-card p {
-        color: #666;
-        line-height: 1.6;
-        margin-bottom: 15px;
-    }
 
-    .welcome-card strong {
-        color: #333;
-    }
+.company-profile {
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 8px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #333;
+}
+
+.company-profile .left {
+  display: flex;
+  flex-direction: column;
+}
+
+.company-profile .title {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 8px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.company-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.company-name .main-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+}
+
+.company-name .sub-name {
+  font-size: 12px;
+  color: #888;
+  letter-spacing: 2px;
+}
+
+.company-profile .right {
+  text-align: right;
+}
+
+.company-profile .right h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.company-profile .right p {
+  margin: 2px 0;
+  font-size: 13px;
+}
+

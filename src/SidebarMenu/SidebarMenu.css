@@ -1,68 +1,118 @@
-.sidebar-menu {
-    width: 250px;
-    height: 100vh;
-    background-color: #2c3e50;
-    color: white;
-    font-family: 'Arial', sans-serif;
+/* Estructura general */
+.container-main-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #f9f9fb;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.menu-header {
-    padding: 20px;
-    border-bottom: 1px solid #34495e;
+.main-drawer {
+  background-color: #2e3a59;
+  color: #fff;
+  width: 250px;
+  border-right: 1px solid #1f2a40;
 }
 
-    .menu-header h3 {
-        margin: 0;
-        font-size: 1.2rem;
-    }
-
-.menu-items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.drawer-menu {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
-.menu-item {
-    padding: 15px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+/* Ítems de menú */
+.drawer-menu-item {
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s ease;
+  position: relative;
+  color: #e1e1e1;
 }
 
-.menu-item-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.drawer-menu-item:hover {
+  background-color: #3b4b6b;
 }
 
-.menu-item:hover {
-    background-color: #34495e;
+.drawer-menu-item.selected {
+  background-color: #4c65a8;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-.menu-item.active {
-    background-color: #3498db;
-    font-weight: bold;
+.drawer-menu-item span.k-icon {
+  margin-right: 12px;
+  font-size: 18px;
 }
 
-.submenu-items {
-    list-style: none;
-    padding-left: 20px;
-    background-color: #1a252f;
+/* Submenús */
+.drawer-submenu {
+  background-color: #39486c;
+  padding-left: 25px;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
 }
 
-.submenu-item {
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.drawer-menu-item.submenu {
+  font-size: 14px;
+  color: #cdd4e0;
+  padding: 10px 15px;
 }
 
-    .submenu-item:hover {
-        background-color: #2c3e50;
-    }
+.drawer-menu-item.submenu:hover {
+  background-color: #4a5b87;
+  color: #fff;
+}
 
-    .submenu-item.active {
-        background-color: #2980b9;
-    }
+/* Flecha de submenú */
+.submenu-toggle {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+  font-size: 12px;
+}
 
-.arrow-icon {
-    font-size: 0.8em;
+.submenu-toggle.open {
+  transform: rotate(180deg);
+}
+
+/* Contenido principal */
+.container-main-body {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  overflow-y: auto;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll personalizado para la barra lateral */
+.main-drawer .drawer-menu {
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #4c65a8 #2e3a59;
+}
+
+.main-drawer .drawer-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main-drawer .drawer-menu::-webkit-scrollbar-thumb {
+  background-color: #4c65a8;
+  border-radius: 3px;
+}
+
+.main-drawer .drawer-menu::-webkit-scrollbar-track {
+  background-color: #2e3a59;
 }

@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { Drawer, DrawerContent } from "@progress/kendo-react-layout";
-import {
-  AppBar,
-  AppBarSection,
-  AppBarSpacer,
-} from "@progress/kendo-react-layout";
 import { Button } from "@progress/kendo-react-buttons";
 import { useNavigate } from "react-router-dom";
-import "./SidebarMenu.css";
+import "./SidebarMenu/SidebarMenu.css";
 
 const menuItems = [
   {
@@ -26,42 +21,12 @@ const menuItems = [
       { text: "Rápidos", route: "/filing/quick" },
     ],
   },
-  {
-    text: "Gestión",
-    icon: "cog",
-    route: "/management",
-  },
-  {
-    text: "Documentales",
-    icon: "file",
-    route: "/documentary",
-  },
-  {
-    text: "Expedientes",
-    icon: "archive",
-    route: "/records",
-  },
-  {
-    text: "Buscadores",
-    icon: "search",
-    route: "/searchers",
-  },
-  {
-    text: "Chat",
-    icon: "comment",
-    route: "/chat",
-  },
-  {
-    text: "Cerrar Sesión",
-    icon: "logout",
-    route: "/logout",
-  },
+  // ... (otros ítems del menú)
 ];
 
-export default function MainLayout({ children, user, onLogout }) {
+export const AppDrawer = ({ children, onLogout }) => {
   const [expanded, setExpanded] = useState(true);
   const [selectedId, setSelectedId] = useState("Inicio");
-  const [openSubmenus, setOpenSubmenus] = useState({}); // <-- nuevo estado
   const navigate = useNavigate();
 
   const handleSelect = (item) => {
@@ -72,12 +37,6 @@ export default function MainLayout({ children, user, onLogout }) {
       } else {
         navigate(item.route);
       }
-    } else if (item.items) {
-      // Toggle submenú
-      setOpenSubmenus((prev) => ({
-        ...prev,
-        [item.text]: !prev[item.text],
-      }));
     }
   };
 
@@ -92,17 +51,8 @@ export default function MainLayout({ children, user, onLogout }) {
         >
           {item.icon && <span className={`k-icon k-i-${item.icon}`} />}
           <span>{item.text}</span>
-          {item.items && (
-            <span
-              className={`submenu-toggle ${
-                openSubmenus[item.text] ? "open" : ""
-              }`}
-            >
-              ▾
-            </span>
-          )}
         </div>
-        {item.items && openSubmenus[item.text] && (
+        {item.items && (
           <div className="drawer-submenu">
             {item.items.map((sub) => (
               <div
@@ -121,18 +71,25 @@ export default function MainLayout({ children, user, onLogout }) {
     ));
 
   return (
-    <div className="container-main-layout">
-      <Drawer
-        expanded={expanded}
-        position="start"
-        mode="push"
-        className="main-drawer"
-      >
-        <DrawerContent>
-          <nav className="drawer-menu">{renderMenuItems(menuItems)}</nav>
-          {/* <main className="container-main-body">{children}</main> */}
-        </DrawerContent>
-      </Drawer>
-    </div>
+    <Drawer
+      expanded={expanded}
+      position="start"
+      mode="push"
+      className="main-drawer"
+    >
+      <DrawerContent>
+        <nav className="drawer-menu">
+          <Button
+            icon="menu"
+            onClick={() => setExpanded(!expanded)}
+            className="toggle-button"
+          />
+          {renderMenuItems(menuItems)}
+        </nav>
+        <main className="container-main-body">
+          {children} {/* Contenido de la ruta (Dashboard, etc.) */}
+        </main>
+      </DrawerContent>
+    </Drawer>
   );
-}
+};
