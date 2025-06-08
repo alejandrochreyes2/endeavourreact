@@ -43,6 +43,16 @@ const ComponentDashboard = () => {
           <p style={{ fontSize: "14px", color: "#FFFFFF" }}>
             Perfil empresarial
           </p>
+          <img
+            src="https://aerocivilsgdeatest.com/ControlDocTest/App_Images/Logos/Aerocivil.png"
+            alt="Decoración"
+            style={{
+              width: "80px",
+              height: "80px",
+              // objectFit: "cover",
+              borderRadius: "4px",
+            }}
+          />
         </div>
 
         {/* Columna derecha */}
