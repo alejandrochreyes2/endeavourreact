@@ -1,23 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { Drawer, DrawerContent } from "@progress/kendo-react-layout";
-import {
-  AppBar,
-  AppBarSection,
-  AppBarSpacer,
-} from "@progress/kendo-react-layout";
-import { Button } from "@progress/kendo-react-buttons";
-import { useNavigate } from "react-router-dom";
 import "./SidebarMenu.css";
+import { useNavigate } from "react-router-dom";
+import {
+  faHome,
+  faFolder,
+  faCog,
+  faFileAlt,
+  faArchive,
+  faSearch,
+  faComment,
+  faSignOutAlt,
+  faChevronDown,
+  faChevronUp,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const menuItems = [
   {
     text: "Inicio",
-    icon: "home",
+    icon: faHome,
     route: "/dashboard",
   },
   {
     text: "Radicación",
-    icon: "folder",
+    icon: faFolder,
     items: [
       { text: "Recibidos", route: "/filing/received" },
       { text: "Internos", route: "/filing/internal" },
@@ -28,56 +35,57 @@ const menuItems = [
   },
   {
     text: "Gestión",
-    icon: "cog",
+    icon: faCog,
     route: "/management",
   },
   {
     text: "Documentales",
-    icon: "file",
+    icon: faFileAlt,
     route: "/documentary",
   },
   {
     text: "Expedientes",
-    icon: "archive",
+    icon: faArchive,
     route: "/records",
   },
   {
     text: "Buscadores",
-    icon: "search",
+    icon: faSearch,
     route: "/searchers",
   },
   {
     text: "Chat",
-    icon: "comment",
+    icon: faComment,
     route: "/chat",
   },
   {
     text: "Cerrar Sesión",
-    icon: "logout",
+    icon: faSignOutAlt,
     route: "/logout",
   },
 ];
 
-export default function MainLayout({ children, user, onLogout }) {
-  const [expanded, setExpanded] = useState(true);
-  const [selectedId, setSelectedId] = useState("Inicio");
-  const [openSubmenus, setOpenSubmenus] = useState({}); // <-- nuevo estado
+// Recibe las props necesarias desde el componente padre
+export default function SidebarMenu({
+  expanded = false,
+  selectedId = "Inicio",
+  openSubmenus = {},
+  onSelect,
+  onLogout,
+}) {
   const navigate = useNavigate();
 
   const handleSelect = (item) => {
-    setSelectedId(item.text);
+    if (onSelect) {
+      onSelect(item);
+    }
+
     if (item.route) {
       if (item.route === "/logout") {
         onLogout && onLogout();
       } else {
         navigate(item.route);
       }
-    } else if (item.items) {
-      // Toggle submenú
-      setOpenSubmenus((prev) => ({
-        ...prev,
-        [item.text]: !prev[item.text],
-      }));
     }
   };
 
@@ -90,19 +98,17 @@ export default function MainLayout({ children, user, onLogout }) {
           }`}
           onClick={() => handleSelect(item)}
         >
-          {item.icon && <span className={`k-icon k-i-${item.icon}`} />}
-          <span>{item.text}</span>
-          {item.items && (
-            <span
-              className={`submenu-toggle ${
-                openSubmenus[item.text] ? "open" : ""
-              }`}
-            >
-              ▾
-            </span>
-          )}
+          <FontAwesomeIcon icon={item.icon} className="menu-icon" />
+          {expanded && <span className="menu-text">{item.text}</span>}
+          {item.items &&
+            (expanded ? (
+              <FontAwesomeIcon
+                icon={openSubmenus[item.text] ? faChevronUp : faChevronDown}
+                className="submenu-toggle"
+              />
+            ) : null)}
         </div>
-        {item.items && openSubmenus[item.text] && (
+        {item.items && openSubmenus[item.text] && expanded && (
           <div className="drawer-submenu">
             {item.items.map((sub) => (
               <div
@@ -112,7 +118,7 @@ export default function MainLayout({ children, user, onLogout }) {
                 }`}
                 onClick={() => handleSelect(sub)}
               >
-                <span>{sub.text}</span>
+                <span className="menu-text">{sub.text}</span>
               </div>
             ))}
           </div>
@@ -121,18 +127,15 @@ export default function MainLayout({ children, user, onLogout }) {
     ));
 
   return (
-    <div className="container-main-layout">
-      <Drawer
-        expanded={expanded}
-        position="start"
-        mode="push"
-        className="main-drawer"
-      >
-        <DrawerContent>
-          <nav className="drawer-menu">{renderMenuItems(menuItems)}</nav>
-          {/* <main className="container-main-body">{children}</main> */}
-        </DrawerContent>
-      </Drawer>
-    </div>
+    <Drawer
+      expanded={expanded}
+      position="start"
+      mode="push"
+      className="main-drawer"
+    >
+      <DrawerContent>
+        <nav className="drawer-menu">{renderMenuItems(menuItems)}</nav>
+      </DrawerContent>
+    </Drawer>
   );
 }

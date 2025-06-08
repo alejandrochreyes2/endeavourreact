@@ -1,118 +1,62 @@
-/* Estructura general */
 .container-main-layout {
   display: flex;
   height: 100vh;
-  background-color: #f9f9fb;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .main-drawer {
-  background-color: #2e3a59;
-  color: #fff;
-  width: 250px;
-  border-right: 1px solid #1f2a40;
+  background-color: #111827;
+  color: white;
 }
 
 .drawer-menu {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  padding: 1rem;
 }
 
-/* Ítems de menú */
 .drawer-menu-item {
-  padding: 12px 20px;
   display: flex;
   align-items: center;
+  padding: 0.6rem;
   cursor: pointer;
-  font-size: 15px;
-  transition: background 0.3s ease;
-  position: relative;
-  color: #e1e1e1;
+  transition: background-color 0.2s;
 }
 
 .drawer-menu-item:hover {
-  background-color: #3b4b6b;
+  background-color: #1f2937;
 }
 
 .drawer-menu-item.selected {
-  background-color: #4c65a8;
-  font-weight: bold;
-  color: #ffffff;
+  background-color: #374151;
 }
 
-.drawer-menu-item span.k-icon {
-  margin-right: 12px;
-  font-size: 18px;
+.menu-icon {
+  margin-right: 10px;
+  min-width: 20px;
 }
 
-/* Submenús */
+.menu-text {
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+.submenu {
+  padding-left: 1.5rem;
+  font-size: 0.95rem;
+}
+
 .drawer-submenu {
-  background-color: #39486c;
-  padding-left: 25px;
-  overflow: hidden;
-  animation: fadeIn 0.3s ease;
+  padding-left: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
-.drawer-menu-item.submenu {
-  font-size: 14px;
-  color: #cdd4e0;
-  padding: 10px 15px;
+.toggle-icon {
+  padding: 0.8rem;
+  cursor: pointer;
+  color: white;
 }
 
-.drawer-menu-item.submenu:hover {
-  background-color: #4a5b87;
-  color: #fff;
-}
-
-/* Flecha de submenú */
-.submenu-toggle {
-  margin-left: auto;
-  transition: transform 0.3s ease;
-  font-size: 12px;
-}
-
-.submenu-toggle.open {
-  transform: rotate(180deg);
-}
-
-/* Contenido principal */
-.container-main-body {
-  flex: 1;
-  padding: 20px;
-  background-color: #ffffff;
-  overflow-y: auto;
-}
-
-/* Animación */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Scroll personalizado para la barra lateral */
-.main-drawer .drawer-menu {
-  max-height: 100vh;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #4c65a8 #2e3a59;
-}
-
-.main-drawer .drawer-menu::-webkit-scrollbar {
-  width: 6px;
-}
-
-.main-drawer .drawer-menu::-webkit-scrollbar-thumb {
-  background-color: #4c65a8;
-  border-radius: 3px;
-}
-
-.main-drawer .drawer-menu::-webkit-scrollbar-track {
-  background-color: #2e3a59;
+.brand-title {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding-left: 10px;
 }
